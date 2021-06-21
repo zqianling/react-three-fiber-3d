@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+/*
+ * @module:
+ * @Author: 张前领<qianling.zhang@hand-china.com>
+ * @Date: 2021-06-03 20:51:09
+ * @LastEditTime: 2021-06-21 14:52:31
+ * @copyright: Copyright (c) 2020,Hand
+ */
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
+import { Environment } from "@react-three/drei";
 
-function App() {
+import Model from "./Model";
+import './App.css';
+import Loader from './Loader';
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Canvas>
+        <ambientLight intensity={1} />
+        <Suspense fallback={<Loader />}>
+          <Model position={[0, -4, -12]} />
+          {/* <Environment preset="apartment" background /> */}
+        </Suspense>
+      </Canvas>
     </div>
   );
 }
-
-export default App;
